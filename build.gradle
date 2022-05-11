@@ -1,0 +1,67 @@
+plugins {
+    id 'java'
+    id "maven-publish"
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'org.spongepowered.plugin' version '0.9.0'
+    id "net.kyori.blossom" version "1.1.0"
+}
+
+
+group 'com.vicious'
+String name = "omega"
+version '1.0.0'
+String mcver = '1.12.2'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://jitpack.io'
+    }
+    maven {
+        url = uri("https://maven.pkg.github.com/Vicious-MCModding/ViciousLib")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
+            password = project.findProperty("gpr.key") ?: System.getenv("GPR_API_KEY")
+        }
+    }
+}
+
+dependencies {
+    compileOnly "org.spongepowered:spongeapi:7.3.0"
+    compileOnly 'com.google.guava:guava:31.1-jre'
+    compile "org.json:json:20211205"
+    compile "com.vicious:viciouslib:1.9.3"
+}
+publishing {
+    repositories {
+        maven {
+            name = "Omega"
+            url = uri("https://maven.pkg.github.com/Vicious-MCModding/Omega")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
+                password = project.findProperty("gpr.key") ?: System.getenv("GPR_API_KEY")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            groupId = "${group}"
+            artifactId = "${name}"
+            version = "${mcver}-${version}"
+            from components.java
+        }
+    }
+}
+
+sponge.plugin.id = 'omega'
+
+shadowJar {
+    archiveFileName = "Omega-${mcver}-${version}.jar"
+}
+
+test {
+    useJUnitPlatform()
+}
