@@ -32,13 +32,13 @@ repositories {
 dependencies {
     compileOnly "org.spongepowered:spongeapi:7.3.0"
     compileOnly 'com.google.guava:guava:31.1-jre'
-    compile "org.json:json:20211205"
+    compile 'org.json:json:20220320'
     compile "com.vicious:viciouslib:1.9.3"
 }
 publishing {
     repositories {
         maven {
-            name = "Omega"
+            name = "omega"
             url = uri("https://maven.pkg.github.com/Vicious-MCModding/Omega")
             credentials {
                 username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
