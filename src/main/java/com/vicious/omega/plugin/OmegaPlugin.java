@@ -2,14 +2,12 @@ package com.vicious.omega.plugin;
 
 import com.vicious.omega.environment.Environment;
 import com.vicious.omega.environment.EnvironmentCompatibility;
-import com.vicious.omega.environment.EnvironmentSpecific;
+import com.vicious.omega.environment.MultiEnvironment;
 import org.spongepowered.api.plugin.Plugin;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
-public class OmegaPlugin implements EnvironmentSpecific {
+public class OmegaPlugin implements MultiEnvironment {
     private Object src;
     public OmegaPlugin(Object src){
         this.src=src;

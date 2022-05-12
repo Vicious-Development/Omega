@@ -2,12 +2,12 @@ package com.vicious.omega.player;
 
 import com.vicious.omega.environment.Environment;
 import com.vicious.omega.environment.EnvironmentCompatibility;
-import com.vicious.omega.environment.EnvironmentSpecific;
+import com.vicious.omega.environment.MultiEnvironment;
 import com.vicious.omega.environment.UnusableEnvironmentException;
 
 import java.util.UUID;
 
-public class Player implements EnvironmentSpecific {
+public class Player implements MultiEnvironment {
     @EnvironmentCompatibility({Environment.SPONGE})
     private Object obj;
     public Player(Object in) {

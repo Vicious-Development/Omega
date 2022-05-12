@@ -9,7 +9,7 @@ plugins {
 
 group 'com.vicious'
 String name = "omega"
-version '1.0.1'
+version '1.0.2'
 String mcver = '1.12.2'
 
 sourceCompatibility = '1.8'
@@ -32,6 +32,7 @@ repositories {
 dependencies {
     compileOnly "org.spongepowered:spongeapi:7.3.0"
     compileOnly 'com.google.guava:guava:31.1-jre'
+    implementation 'org.slf4j:slf4j-api:1.7.33'
     compile 'org.json:json:20220320'
     compile "com.vicious:viciouslib:1.9.3"
 }

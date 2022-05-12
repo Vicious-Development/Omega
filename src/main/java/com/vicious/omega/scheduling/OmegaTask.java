@@ -2,16 +2,14 @@ package com.vicious.omega.scheduling;
 
 import com.vicious.omega.environment.Environment;
 import com.vicious.omega.environment.EnvironmentCompatibility;
-import com.vicious.omega.environment.EnvironmentSpecific;
-import com.vicious.omega.environment.UnusableEnvironmentException;
+import com.vicious.omega.environment.MultiEnvironment;
 import com.vicious.omega.plugin.OmegaPlugin;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.scheduler.Task;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledFuture;
 
-public class OmegaTask implements EnvironmentSpecific {
+public class OmegaTask implements MultiEnvironment {
     private OmegaPlugin owner;
     private Object src;
     public OmegaTask(Object src){

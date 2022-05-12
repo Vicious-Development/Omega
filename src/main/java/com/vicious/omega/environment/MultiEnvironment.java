@@ -2,7 +2,7 @@ package com.vicious.omega.environment;
 
 import com.vicious.omega.Omega;
 
-public interface EnvironmentSpecific {
+public interface MultiEnvironment {
     default boolean activeIn(Environment required){
         return Omega.getEnvironment()==required;
     }
