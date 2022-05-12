@@ -10,13 +10,18 @@ public class Omega {
     public static Environment getEnvironment(){
         return environment;
     }
+    private static Omega OMEGA;
     public Omega(){
+        OMEGA=this;
         try {
             Class.forName("org.spongepowered.api.Sponge");
             environment = Environment.SPONGE;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    public Omega getOmega(){
+        return OMEGA;
     }
     public Server getServer(){
         return Server.getServer();
