@@ -42,10 +42,10 @@ public class Omega {
     public static Omega getOmega(){
         return OMEGA;
     }
-    public Server getServer(){
+    public static Server getServer(){
         return Server.getServer();
     }
-    public OmegaLogger getLogger(){
+    public static OmegaLogger getLogger(){
         return OmegaLogger.getInstance();
     }
 }

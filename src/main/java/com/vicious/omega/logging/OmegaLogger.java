@@ -23,17 +23,29 @@ public class OmegaLogger {
     private OmegaLogger(Object src){
         this.src=src;
     }
-    public void info(String info){
+    public void inf(String info){
         asSLF4J().info(info);
     }
-    public void warn(String warn){
+    public void wrn(String warn){
         asSLF4J().warn(warn);
     }
-    public void error(String error){
+    public void err(String error){
         asSLF4J().error(error);
     }
-    public void debug(String debug){
+    public void dbg(String debug){
         asSLF4J().debug(debug);
+    }
+    public static void info(String info){
+        getInstance().inf(info);
+    }
+    public static void warn(String warn){
+        getInstance().wrn(warn);
+    }
+    public static void error(String error){
+        getInstance().err(error);
+    }
+    public static void debug(String debug){
+        getInstance().dbg(debug);
     }
 
     /**
