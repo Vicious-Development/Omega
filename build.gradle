@@ -9,7 +9,7 @@ plugins {
 
 group 'com.vicious'
 String name = "omega"
-version '1.0.3'
+version '1.0.4'
 String mcver = '1.12.2'
 
 sourceCompatibility = '1.8'
@@ -19,6 +19,10 @@ repositories {
     mavenCentral()
     maven {
         url 'https://jitpack.io'
+    }
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
     }
     maven {
         url = uri("https://maven.pkg.github.com/Vicious-MCModding/ViciousLib")
@@ -32,6 +36,7 @@ repositories {
 dependencies {
     compileOnly "org.spongepowered:spongeapi:7.3.0"
     compileOnly 'com.google.guava:guava:31.1-jre'
+    compileOnly 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
     implementation 'org.slf4j:slf4j-api:1.7.33'
     compile 'org.json:json:20220320'
     compile "com.vicious:viciouslib:1.9.3"

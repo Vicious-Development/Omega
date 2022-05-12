@@ -3,6 +3,7 @@ package com.vicious.omega.environment;
 public enum Environment {
     SPONGE,
     BUKKIT,
+    SPIGOT,
     PAPER,
     JDA,
     RAWJAVA;

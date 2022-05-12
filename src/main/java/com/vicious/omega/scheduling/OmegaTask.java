@@ -19,16 +19,16 @@ public class OmegaTask implements MultiEnvironment {
         this.owner=owner;
     }
     public void cancel(){
-        if(activeIn(Environment.SPONGE)) asSponge().cancel();
+        if(Environment.SPONGE.active()) asSponge().cancel();
         else asJava().cancel(false);
         Scheduler.remove(this);
     }
     public boolean isCancelled(){
-        if(activeIn(Environment.SPONGE)) return !Sponge.getScheduler().getScheduledTasks().contains(asSponge());
+        if(Environment.SPONGE.active()) return !Sponge.getScheduler().getScheduledTasks().contains(asSponge());
         else return asJava().isCancelled();
     }
     public boolean isDone(){
-        if(activeIn(Environment.SPONGE)) return !Sponge.getScheduler().getScheduledTasks().contains(asSponge());
+        if(Environment.SPONGE.active()) return !Sponge.getScheduler().getScheduledTasks().contains(asSponge());
         else return asJava().isDone();
     }
 
