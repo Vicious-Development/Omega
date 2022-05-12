@@ -16,4 +16,9 @@ public enum Environment {
     public void setActive() {
         active=true;
     }
+
+    @Override
+    public String toString() {
+        return name();
+    }
 }

@@ -15,7 +15,9 @@ public class EnviromentWrapper<T extends EnviromentWrapper<T>> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()){
+            return src.equals(o);
+        }
         EnviromentWrapper<?> that = (EnviromentWrapper<?>) o;
         return Objects.equals(src, that.src);
     }
@@ -25,6 +27,22 @@ public class EnviromentWrapper<T extends EnviromentWrapper<T>> {
         return Objects.hash(src);
     }
     public <T extends EnviromentWrapper<T>> Collection<T> wrap(Collection<?> og, Function<Object,T> constructor){
+        List<T> ret = new ArrayList<>();
+        for (Object o : og) {
+            ret.add(constructor.apply(o));
+        }
+        return ret;
+    }
+
+    public <T extends EnviromentWrapper<T>> Set<T> wrap(Set<?> og, Function<Object,T> constructor){
+        Set<T> ret = new HashSet<>();
+        for (Object o : og) {
+            ret.add(constructor.apply(o));
+        }
+        return ret;
+    }
+
+    public <T extends EnviromentWrapper<T>> Iterable<T> wrap(Iterable<?> og, Function<Object,T> constructor){
         List<T> ret = new ArrayList<>();
         for (Object o : og) {
             ret.add(constructor.apply(o));

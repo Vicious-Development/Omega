@@ -11,10 +11,6 @@ import org.spongepowered.api.plugin.PluginContainer;
 
 @Plugin(id = "omega", name = "Omega", version = "@version@")
 public class Omega {
-    private static Environment environment = Environment.RAWJAVA;
-    public static Environment getEnvironment(){
-        return environment;
-    }
     private static Omega OMEGA;
 
     @EnvironmentCompatibility(Environment.SPONGE)
@@ -25,8 +21,11 @@ public class Omega {
         OMEGA=this;
         try {
             Class.forName("org.spongepowered.api.Sponge");
-            environment = Environment.SPONGE;
             Environment.SPONGE.setActive();
+        } catch (ClassNotFoundException ignored) {}
+        try {
+            Class.forName("org.bukkit.Bukkit");
+            Environment.BUKKIT.setActive();
         } catch (ClassNotFoundException ignored) {}
     }
 
