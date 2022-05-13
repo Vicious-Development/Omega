@@ -3,19 +3,19 @@ package com.vicious.omega.scheduling;
 import com.vicious.omega.environment.Environment;
 import com.vicious.omega.environment.EnvironmentCompatibility;
 import com.vicious.omega.environment.MultiEnvironment;
-import com.vicious.omega.plugin.OmegaPlugin;
+import com.vicious.omega.plugin.Plugin;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.scheduler.Task;
 
 import java.util.concurrent.Future;
 
 public class OmegaTask implements MultiEnvironment {
-    private OmegaPlugin owner;
+    private Plugin owner;
     private Object src;
     public OmegaTask(Object src){
         this.src=src;
     }
-    public void setOwner(OmegaPlugin owner){
+    public void setOwner(Plugin owner){
         this.owner=owner;
     }
     public void cancel(){
@@ -41,7 +41,7 @@ public class OmegaTask implements MultiEnvironment {
         return (Future<?>) src;
     }
 
-    public OmegaPlugin getOwner() {
+    public Plugin getOwner() {
         return owner;
     }
 }

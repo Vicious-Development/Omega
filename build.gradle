@@ -9,7 +9,7 @@ plugins {
 
 group 'com.vicious'
 String name = "omega"
-version '1.0.6'
+version '1.0.8'
 String mcver = '1.12.2'
 
 sourceCompatibility = '1.8'
@@ -39,7 +39,7 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
     implementation 'org.slf4j:slf4j-api:1.7.33'
     compile 'org.json:json:20220320'
-    compile "com.vicious:viciouslib:1.9.3"
+    compile "com.vicious:viciouslib:1.9.6"
 }
 publishing {
     repositories {
