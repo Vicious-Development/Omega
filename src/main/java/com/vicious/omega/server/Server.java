@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.text.serializer.TextSerializers;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
         if(instance == null){
             if(Environment.SPONGE.active()) instance = new Server(Sponge.getServer());
             else if(Environment.BUKKIT.active()) instance = new Server(Bukkit.getServer());
-            throw new UnsupportedEnvironmentException();
+            else throw new UnsupportedEnvironmentException();
         }
         return instance;
     }
@@ -41,8 +42,8 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
         if(Environment.SPONGE.active()){
             return new Player(asSponge().getPlayer(uuid));
         }
-        if(Environment.BUKKIT.active()) return new Player(asBukkit().getPlayer(uuid));
-        throw new UnsupportedEnvironmentException();
+        else if(Environment.BUKKIT.active()) return new Player(asBukkit().getPlayer(uuid));
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
@@ -51,13 +52,13 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
             return new Player(asSponge().getPlayer(name));
         }
         else if(Environment.BUKKIT.active()) return new Player(asBukkit().getPlayer(name));
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public int getMaxPlayers(){
         if(Environment.SPONGE.active()) return asSponge().getMaxPlayers();
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
@@ -68,7 +69,7 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
         else if(Environment.BUKKIT.active()){
             return wrap(asBukkit().getOnlinePlayers(),Player::new);
         }
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
@@ -79,7 +80,7 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
         else if(Environment.BUKKIT.active()){
             return wrap(asBukkit().getWorlds(),World::new);
         }
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
@@ -90,59 +91,59 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
         else if(Environment.BUKKIT.active()){
             return wrap(asBukkit().getWorlds(),WorldProperties::new);
         }
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public World getWorld(UUID uuid){
         if(Environment.SPONGE.active()) return new World(asSponge().getWorld(uuid));
         else if(Environment.BUKKIT.active()) return new World(asBukkit().getWorld(uuid));
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public World getWorld(String name){
         if(Environment.SPONGE.active()) return new World(asSponge().getWorld(name));
         else if(Environment.BUKKIT.active()) return new World(asBukkit().getWorld(name));
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE})
     public WorldProperties getDefaultWorld(){
         if(Environment.SPONGE.active()) return new WorldProperties(asSponge().getDefaultWorld());
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE})
     public String getDefaultWorldName(){
         if(Environment.SPONGE.active()) return asSponge().getDefaultWorldName();
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE})
     public World loadWorld(String name){
         if(Environment.SPONGE.active()) return new World(asSponge().loadWorld(name));
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE})
     public World loadWorld(UUID uuid){
         if(Environment.SPONGE.active()) return new World(asSponge().loadWorld(uuid));
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public WorldProperties getWorldProperties(String name){
         if(Environment.SPONGE.active()) return new WorldProperties(asSponge().getWorldProperties(name));
-        if(Environment.BUKKIT.active()) return new WorldProperties(asBukkit().getWorld(name));
-        throw new UnsupportedEnvironmentException();
+        else if(Environment.BUKKIT.active()) return new WorldProperties(asBukkit().getWorld(name));
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public WorldProperties getWorldProperties(UUID uuid){
         if(Environment.SPONGE.active()) return new WorldProperties(asSponge().getWorldProperties(uuid));
-        if(Environment.BUKKIT.active()) return new WorldProperties(asBukkit().getWorld(uuid));
-        throw new UnsupportedEnvironmentException();
+        else if(Environment.BUKKIT.active()) return new WorldProperties(asBukkit().getWorld(uuid));
+        else throw new UnsupportedEnvironmentException();
     }
 
     //TODO: Implement Sponge unload world
@@ -150,8 +151,8 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public Scoreboard getScoreboard(){
         if(Environment.SPONGE.active()) return new Scoreboard(asSponge().getServerScoreboard());
-        if(Environment.BUKKIT.active()) return new Scoreboard(asBukkit().getScoreboardManager().getMainScoreboard());
-        throw new UnsupportedEnvironmentException();
+        else if(Environment.BUKKIT.active()) return new Scoreboard(asBukkit().getScoreboardManager().getMainScoreboard());
+        else throw new UnsupportedEnvironmentException();
     }
 
     //TODO Impl sponge chunk layout
@@ -169,16 +170,16 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public String getIP(String serializedText){
-        if(Environment.SPONGE.active()) asSponge().getBoundAddress().get().toString();
-        else if(Environment.BUKKIT.active()) asBukkit().getIp();
-        throw new UnsupportedEnvironmentException();
+        if(Environment.SPONGE.active()) return asSponge().getBoundAddress().get().toString();
+        else if(Environment.BUKKIT.active()) return asBukkit().getIp();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public boolean hasWhitelist(){
-        if(Environment.SPONGE.active()) asSponge().hasWhitelist();
-        else if(Environment.BUKKIT.active()) asBukkit().hasWhitelist();
-        throw new UnsupportedEnvironmentException();
+        if(Environment.SPONGE.active()) return asSponge().hasWhitelist();
+        else if(Environment.BUKKIT.active()) return asBukkit().hasWhitelist();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
@@ -190,23 +191,23 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public boolean getOnlineMode(){
-        if(Environment.SPONGE.active()) asSponge().getOnlineMode();
-        else if(Environment.BUKKIT.active()) asBukkit().getOnlineMode();
-        throw new UnsupportedEnvironmentException();
+        if(Environment.SPONGE.active()) return asSponge().getOnlineMode();
+        else if(Environment.BUKKIT.active()) return asBukkit().getOnlineMode();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public String getMotd(){
-        if(Environment.SPONGE.active()) TextSerializers.FORMATTING_CODE.serialize(asSponge().getMotd());
-        else if(Environment.BUKKIT.active()) asBukkit().getMotd();
-        throw new UnsupportedEnvironmentException();
+        if(Environment.SPONGE.active()) return TextSerializers.FORMATTING_CODE.serialize(asSponge().getMotd());
+        else if(Environment.BUKKIT.active()) return asBukkit().getMotd();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public void shutdown(){
         if(Environment.SPONGE.active()) asSponge().shutdown();
         else if(Environment.BUKKIT.active()) asBukkit().shutdown();
-        else System.exit(0);
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
@@ -214,14 +215,14 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
         if(Environment.SPONGE.active()) asSponge().shutdown(TextSerializers.FORMATTING_CODE.deserialize(message));
         //Todo allow bukkit to shutdown with msg.
         else if(Environment.BUKKIT.active()) asBukkit();
-        else System.exit(0);
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public void getConsole(){
         if(Environment.SPONGE.active()) new Console(asSponge().getConsole());
         else if(Environment.BUKKIT.active()) new Console(asBukkit().getConsoleSender());
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     //TODO Implement Sponge getChunkTicketManager
@@ -230,17 +231,17 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public double getTPS(){
-        if(Environment.SPONGE.active()) asSponge().getTicksPerSecond();
+        if(Environment.SPONGE.active()) return asSponge().getTicksPerSecond();
             //TODO use a better measurement
-        else if(Environment.BUKKIT.active()) asBukkit().getTicksPerAnimalSpawns();
-        throw new UnsupportedEnvironmentException();
+        else if(Environment.BUKKIT.active()) return asBukkit().getTicksPerAnimalSpawns();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public int getIdleTimeout(){
-        if(Environment.SPONGE.active()) asSponge().getPlayerIdleTimeout();
-        else if(Environment.BUKKIT.active()) asBukkit().getIdleTimeout();
-        throw new UnsupportedEnvironmentException();
+        if(Environment.SPONGE.active()) return asSponge().getPlayerIdleTimeout();
+        else if(Environment.BUKKIT.active()) return asBukkit().getIdleTimeout();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
@@ -336,6 +337,13 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
             }
         }
         else if(bukkit()) return asBukkit().getOfflinePlayer(id).getName();
+        else throw new UnsupportedEnvironmentException();
+    }
+
+    @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
+    public Path getGameDir(){
+        if(sponge()) return Sponge.getGame().getGameDirectory();
+        else if(bukkit()) return asBukkit().getWorldContainer().toPath();
         else throw new UnsupportedEnvironmentException();
     }
 }

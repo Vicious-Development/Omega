@@ -39,6 +39,7 @@ public class PluginCollector {
         try {
             ZipFile zip = new ZipFile(file);
             ZipEntry pluginEntry = zip.getEntry("omegaplugin.info");
+            if(pluginEntry == null) return null;
             InputStream infoStream = zip.getInputStream(pluginEntry);
             Scanner scan = new Scanner(infoStream);
             String mainClassName = scan.nextLine();

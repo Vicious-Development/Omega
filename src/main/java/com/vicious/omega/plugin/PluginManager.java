@@ -22,6 +22,7 @@ public class PluginManager {
         int i = 0;
         for (OmegaPluginImplementation value : plugins.values()) {
             value.setLoadOrder(i);
+            value.loaded(true);
             plgList.add(value);
             i++;
         }
@@ -47,9 +48,9 @@ public class PluginManager {
             }
         }
         for (int j = 0; j < plgList.size(); j++) {
-            if(!plgList.get(i).isLoaded()){
-                plgList.remove(i);
-                i--;
+            if(!plgList.get(j).isLoaded()){
+                plgList.remove(j);
+                j--;
             }
         }
         OmegaPluginImplementation[] result = new OmegaPluginImplementation[plgList.size()];

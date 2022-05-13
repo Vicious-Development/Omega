@@ -1,4 +1,4 @@
-package com.vicious.omega.event.player;
+package com.vicious.omega.event.omega;
 
 import com.vicious.omega.environment.Environment;
 import com.vicious.omega.environment.annotations.EnvironmentCompatibility;

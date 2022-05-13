@@ -22,15 +22,15 @@ public class Entity<OMEGAENTITY extends Entity<OMEGAENTITY,SPONGEENTITY,BUKKITEN
     }
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public UUID getUUID(){
-        if(Environment.SPONGE.active()) asSponge().getUniqueId();
-        else if(Environment.BUKKIT.active()) asBukkit().getUniqueId();
-        throw new UnsupportedEnvironmentException();
+        if(Environment.SPONGE.active()) return asSponge().getUniqueId();
+        else if(Environment.BUKKIT.active()) return asBukkit().getUniqueId();
+        else throw new UnsupportedEnvironmentException();
     }
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public String getName(){
-        if(Environment.SPONGE.active()) asSponge().get(Keys.DISPLAY_NAME).orElse(Text.of("")).toPlainSingle();
-        else if(Environment.BUKKIT.active()) asBukkit().getName();
-        throw new UnsupportedEnvironmentException();
+        if(Environment.SPONGE.active()) return asSponge().get(Keys.DISPLAY_NAME).orElse(Text.of("")).toPlainSingle();
+        else if(Environment.BUKKIT.active()) return asBukkit().getName();
+        else throw new UnsupportedEnvironmentException();
     }
     @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
     public Vector3d getPos(){
@@ -39,7 +39,7 @@ public class Entity<OMEGAENTITY extends Entity<OMEGAENTITY,SPONGEENTITY,BUKKITEN
             Location l = asBukkit().getLocation();
             return new Vector3d(l.getX(),l.getY(), l.getZ());
         }
-        throw new UnsupportedEnvironmentException();
+        else throw new UnsupportedEnvironmentException();
     }
 
     @Wrapper

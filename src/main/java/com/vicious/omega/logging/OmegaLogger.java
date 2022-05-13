@@ -1,7 +1,5 @@
 package com.vicious.omega.logging;
 
-import com.vicious.omega.Omega;
-import com.vicious.omega.environment.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,12 +7,7 @@ public class OmegaLogger {
     private static OmegaLogger instance;
     public static OmegaLogger getInstance(){
         if(instance == null){
-            if(Environment.SPONGE.active()){
-                instance = new OmegaLogger(Omega.spongeLogger());
-            }
-            else{
-                instance = new OmegaLogger(LoggerFactory.getLogger("Omega"));
-            }
+            instance = new OmegaLogger(LoggerFactory.getLogger("Omega"));
         }
         return instance;
     }

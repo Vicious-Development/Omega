@@ -1,6 +1,6 @@
 package com.vicious.omega;
 
-import com.vicious.omega.event.player.PlayerEventListeners;
+import com.vicious.omega.event.bukkit.PlayerEventListeners;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class OmegaBukkit extends JavaPlugin {
