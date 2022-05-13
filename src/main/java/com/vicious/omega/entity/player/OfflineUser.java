@@ -46,28 +46,28 @@ public class OfflineUser extends PluginAPIWrapper<OfflineUser, User, OfflinePlay
     }
 
     //todo: add bukkit implementation
-    @EnvironmentCompatibility({Environment.BUKKIT,})
+    @EnvironmentCompatibility({Environment.SPONGE})
     public UUID getWorldUUID(){
         if(sponge()) return asSponge().getWorldUniqueId().orElse(null);
         else throw new UnsupportedEnvironmentException();
     }
 
     //todo: add bukkit implementation
-    @EnvironmentCompatibility({Environment.BUKKIT})
+    @EnvironmentCompatibility({Environment.SPONGE})
     public boolean setLocation(Vector3d pos, UUID world){
         if(sponge()) return asSponge().setLocation(pos,world);
         else throw new UnsupportedEnvironmentException();
     }
 
     //todo: add bukkit implementation
-    @EnvironmentCompatibility({Environment.BUKKIT})
+    @EnvironmentCompatibility({Environment.SPONGE})
     public void setLocation(Vector3d rotation){
         if(sponge()) asSponge().setRotation(rotation);
         else throw new UnsupportedEnvironmentException();
     }
 
     //todo: add bukkit implementation
-    @EnvironmentCompatibility({Environment.BUKKIT})
+    @EnvironmentCompatibility({Environment.SPONGE})
     public Vector3d getRotation(){
         if(sponge()) return asSponge().getRotation();
         else throw new UnsupportedEnvironmentException();
@@ -76,9 +76,16 @@ public class OfflineUser extends PluginAPIWrapper<OfflineUser, User, OfflinePlay
     //TODO: implement Sponge getStatisticData()
 
     //todo: add bukkit implementation
-    @EnvironmentCompatibility({Environment.BUKKIT})
+    @EnvironmentCompatibility({Environment.SPONGE})
     public Inventory getEnderChestInventory(){
         if(sponge()) return new Inventory(asSponge().getEnderChestInventory());
+        else throw new UnsupportedEnvironmentException();
+    }
+
+    @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
+    public UUID getUUID(){
+        if(sponge()) return asSponge().getUniqueId();
+        else if(bukkit()) return asBukkit().getUniqueId();
         else throw new UnsupportedEnvironmentException();
     }
 }
