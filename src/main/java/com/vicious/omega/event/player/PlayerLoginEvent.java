@@ -1,7 +1,7 @@
 package com.vicious.omega.event.player;
 
 import com.vicious.omega.environment.Environment;
-import com.vicious.omega.environment.EnvironmentCompatibility;
+import com.vicious.omega.environment.annotations.EnvironmentCompatibility;
 import com.vicious.omega.environment.UnsupportedEnvironmentException;
 import com.vicious.omega.event.impl.PluginAPIEventWrapper;
 import com.vicious.omega.event.impl.OmegaEvent;

@@ -1,5 +1,7 @@
 package com.vicious.omega.environment;
 
+import com.vicious.omega.environment.annotations.EnvironmentCompatibility;
+
 public class PluginAPIWrapper<OMEGATYPE extends PluginAPIWrapper<OMEGATYPE, SPONGETYPE, BUKKITTYPE>, SPONGETYPE, BUKKITTYPE> extends EnviromentWrapper<OMEGATYPE>{
     public PluginAPIWrapper(Object src) {
         super(src);

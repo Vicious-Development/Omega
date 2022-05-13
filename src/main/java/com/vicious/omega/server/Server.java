@@ -1,17 +1,21 @@
 package com.vicious.omega.server;
 
+import com.vicious.omega.entity.mob.Entity;
+import com.vicious.omega.entity.player.Player;
 import com.vicious.omega.environment.Environment;
-import com.vicious.omega.environment.EnvironmentCompatibility;
 import com.vicious.omega.environment.PluginAPIWrapper;
 import com.vicious.omega.environment.UnsupportedEnvironmentException;
-import com.vicious.omega.player.Player;
+import com.vicious.omega.environment.annotations.EnvironmentCompatibility;
+import com.vicious.omega.world.Chunk;
 import com.vicious.omega.world.World;
 import com.vicious.omega.world.WorldProperties;
 import org.bukkit.Bukkit;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.text.serializer.TextSerializers;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -252,4 +256,87 @@ public class Server extends PluginAPIWrapper<Server,org.spongepowered.api.Server
         else if(Environment.BUKKIT.active()) return asBukkit().isPrimaryThread();
         else throw new UnsupportedEnvironmentException();
     }
+
+    /**
+     * @return total number of chunks loaded in every world.
+     */
+    @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
+    public int getTotalLoadedChunks(){
+        int total=0;
+        if(Environment.SPONGE.active()) {
+            for (World world : getWorlds()) {
+                total+=world.getTotalLoadedChunks();
+            }
+        }
+        else if(Environment.BUKKIT.active()) {
+            for (org.bukkit.World world : asBukkit().getWorlds()) {
+                total+=world.getLoadedChunks().length;
+            }
+        }
+        else throw new UnsupportedEnvironmentException();
+        return total;
+    }
+
+    /**
+     * @return all chunks loaded in all worlds.
+     */
+    @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
+    public List<Chunk> getLoadedChunks(){
+        List<Chunk> chunks = new ArrayList<>();
+        for (World world : getWorlds()) {
+            chunks.addAll(world.getLoadedChunks());
+        }
+        return chunks;
+    }
+
+    /**
+     * @return gets the total number of entities on the server.
+     */
+    @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
+    public int getTotalEntities(){
+        int total=0;
+        if(Environment.SPONGE.active()) {
+            for (org.spongepowered.api.world.World world : asSponge().getWorlds()) {
+                total+=world.getEntities().size();
+            }
+        }
+        else if(Environment.BUKKIT.active()) {
+            for (org.bukkit.World world : asBukkit().getWorlds()) {
+                total+=world.getEntities().size();
+            }
+        }
+        else throw new UnsupportedEnvironmentException();
+        return total;
+    }
+
+    /**
+     * @return gets every entity on the server.
+     */
+    @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
+    public List<Entity> getEntities(){
+        List<Entity> entities = new ArrayList<>();
+        for (World world : getWorlds()) {
+            entities.addAll(world.getEntities());
+        }
+        return entities;
+    }
+
+    /**
+     * Returns a player's UUID regardless of if they are online or not.
+     * @param id - the uuid to look for.
+     * @return the player name
+     */
+    @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
+    public String getNameOfPlayerWithUUID(UUID id){
+        if(sponge()) {
+            try {
+                return asSponge().getGameProfileManager().get(id).get().getName().get();
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        else if(bukkit()) return asBukkit().getOfflinePlayer(id).getName();
+        else throw new UnsupportedEnvironmentException();
+    }
 }
+

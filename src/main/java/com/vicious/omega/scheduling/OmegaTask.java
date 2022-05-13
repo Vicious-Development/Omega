@@ -1,7 +1,7 @@
 package com.vicious.omega.scheduling;
 
 import com.vicious.omega.environment.Environment;
-import com.vicious.omega.environment.EnvironmentCompatibility;
+import com.vicious.omega.environment.annotations.EnvironmentCompatibility;
 import com.vicious.omega.environment.MultiEnvironment;
 import com.vicious.omega.plugin.Plugin;
 import org.spongepowered.api.Sponge;

@@ -4,8 +4,10 @@ public enum Environment {
     SPONGE,
     BUKKIT,
     SPIGOT,
+    BUNGEE,
     PAPER,
     JDA,
+    OMEGA,
     RAWJAVA;
 
     boolean active = false;

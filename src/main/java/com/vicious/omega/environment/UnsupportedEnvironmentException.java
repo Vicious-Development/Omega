@@ -1,5 +1,6 @@
 package com.vicious.omega.environment;
 
+import com.vicious.omega.environment.annotations.EnvironmentCompatibility;
 import com.vicious.viciouslib.util.reflect.deep.DeepReflection;
 import com.vicious.viciouslib.util.reflect.deep.MethodSearchContext;
 import com.vicious.viciouslib.util.reflect.deep.TotalFailureException;
@@ -14,14 +15,18 @@ public class UnsupportedEnvironmentException extends RuntimeException{
         super();
         StackTraceElement[] trace = getStackTrace();
         try {
-            Class<?> source = Class.forName(trace[0].getClassName());
-            try {
-                ReflectiveMethod m = DeepReflection.getMethod(source,new MethodSearchContext().name(trace[0].getMethodName()));
-                Method method = m.getReflectiveTarget(source);
-                EnvironmentCompatibility compat = method.getAnnotation(EnvironmentCompatibility.class);
-                msg = "Application not running in any of the environments: " + Arrays.toString(compat.value());
-            } catch (TotalFailureException e) {
-                e.printStackTrace();
+            for (StackTraceElement elem : trace) {
+                Class<?> source = Class.forName(elem.getClassName());
+                try {
+                    ReflectiveMethod m = DeepReflection.getMethod(source,new MethodSearchContext().name(trace[0].getMethodName()));
+                    Method method = m.getReflectiveTarget(source);
+                    EnvironmentCompatibility compat = method.getAnnotation(EnvironmentCompatibility.class);
+                    if(compat == null) continue;
+                    msg = "Application not running in any of the environments: " + Arrays.toString(compat.value());
+                    break;
+                } catch (TotalFailureException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

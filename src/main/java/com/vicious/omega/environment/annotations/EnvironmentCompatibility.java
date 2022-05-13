@@ -1,4 +1,6 @@
-package com.vicious.omega.environment;
+package com.vicious.omega.environment.annotations;
+
+import com.vicious.omega.environment.Environment;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

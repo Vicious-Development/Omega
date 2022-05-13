@@ -49,4 +49,29 @@ public class EnviromentWrapper<T extends EnviromentWrapper<T>> {
         }
         return ret;
     }
+
+    public <T extends EnviromentWrapper<T>> List<T> wrapAsList(Iterable<?> og, Function<Object,T> constructor){
+        List<T> ret = new ArrayList<>();
+        for (Object o : og) {
+            ret.add(constructor.apply(o));
+        }
+        return ret;
+    }
+    public <T extends EnviromentWrapper<T>> List<T> wrapAsList(Object[] og, Function<Object,T> constructor){
+        List<T> ret = new ArrayList<>();
+        for (Object o : og) {
+            ret.add(constructor.apply(o));
+        }
+        return ret;
+    }
+    public boolean isNull(){
+        return src == null;
+    }
+    public boolean notNull(){
+        return src != null;
+    }
+    protected void nullSafe(Runnable nullSafeCode){
+        if(src == null) return;
+        else nullSafeCode.run();
+    }
 }

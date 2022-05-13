@@ -1,7 +1,7 @@
 package com.vicious.omega.inventory.bukkit;
 
 import com.vicious.omega.environment.Environment;
-import com.vicious.omega.environment.EnvironmentCompatibility;
+import com.vicious.omega.environment.annotations.EnvironmentCompatibility;
 import org.bukkit.inventory.ItemStack;
 
 /**

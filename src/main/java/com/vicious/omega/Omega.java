@@ -2,7 +2,7 @@ package com.vicious.omega;
 
 import com.google.inject.Inject;
 import com.vicious.omega.environment.Environment;
-import com.vicious.omega.environment.EnvironmentCompatibility;
+import com.vicious.omega.environment.annotations.EnvironmentCompatibility;
 import com.vicious.omega.event.impl.EventHandlers;
 import com.vicious.omega.event.impl.OmegaListener;
 import com.vicious.omega.event.player.PlayerEventListeners;

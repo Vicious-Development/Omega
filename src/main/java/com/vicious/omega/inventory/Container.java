@@ -1,10 +1,10 @@
 package com.vicious.omega.inventory;
 
 import com.vicious.omega.environment.Environment;
-import com.vicious.omega.environment.EnvironmentCompatibility;
+import com.vicious.omega.environment.annotations.EnvironmentCompatibility;
 import com.vicious.omega.environment.PluginAPIWrapper;
 import com.vicious.omega.environment.UnsupportedEnvironmentException;
-import com.vicious.omega.player.Player;
+import com.vicious.omega.entity.player.Player;
 import org.bukkit.inventory.InventoryHolder;
 
 import java.util.Collection;
