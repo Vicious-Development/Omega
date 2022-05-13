@@ -1,5 +1,6 @@
 package com.vicious.omega.scheduling;
 
+import com.vicious.omega.Omega;
 import com.vicious.omega.environment.Environment;
 import com.vicious.omega.environment.MultiEnvironment;
 import com.vicious.omega.plugin.Plugin;
@@ -16,19 +17,19 @@ public class Scheduler implements MultiEnvironment {
     private static Map<Plugin, IdentityHashMap<OmegaTask,OmegaTask>> taskMap = new HashMap<>();
     private static ScheduledExecutorService syncScheduler = Executors.newScheduledThreadPool(1);
     public static OmegaTask scheduleAtFixedRate(long interval, long initialDelay, TimeUnit unit, Plugin plugin, Runnable command){
-        if(MultiEnvironment.active(Environment.SPONGE)) return add(new OmegaTask(Sponge.getScheduler().createTaskBuilder().interval(interval, unit).delay(initialDelay,unit).execute(command).submit(plugin.asSponge())),plugin);
+        if(MultiEnvironment.active(Environment.SPONGE)) return add(new OmegaTask(Sponge.getScheduler().createTaskBuilder().interval(interval, unit).delay(initialDelay,unit).execute(command).submit(Omega.getOmega())),plugin);
         return add(new OmegaTask(syncScheduler.scheduleAtFixedRate(command,initialDelay,interval,unit)),plugin);
     }
     public static OmegaTask schedule(long delay, TimeUnit unit, Plugin plugin, Runnable command){
-        if(MultiEnvironment.active(Environment.SPONGE)) return add(new OmegaTask(Sponge.getScheduler().createTaskBuilder().delay(delay,unit).execute(command).submit(plugin.asSponge())),plugin);
-        return add(new OmegaTask(syncScheduler.schedule(command,delay,unit)),plugin);
+        if(MultiEnvironment.active(Environment.SPONGE)) return new OmegaTask(Sponge.getScheduler().createTaskBuilder().delay(delay,unit).execute(command).submit(Omega.getOmega()));
+        return new OmegaTask(syncScheduler.schedule(command,delay,unit));
     }
 
     public static OmegaTask scheduleAtFixedRate(long interval, long initialDelay, TimeUnit unit, boolean async, Plugin plugin, Runnable command){
         if(MultiEnvironment.active(Environment.SPONGE)) {
             Task.Builder bld = Sponge.getScheduler().createTaskBuilder().delay(initialDelay,unit).interval(interval,unit).execute(command);
             if(async) bld.async();
-            return add(new OmegaTask(bld.submit(plugin.asSponge())),plugin);
+            return add(new OmegaTask(bld.submit(Omega.getOmega())),plugin);
         }
         return add(new OmegaTask(syncScheduler.scheduleAtFixedRate(command,initialDelay,interval,unit)),plugin);
     }
@@ -36,20 +37,20 @@ public class Scheduler implements MultiEnvironment {
         if(MultiEnvironment.active(Environment.SPONGE)) {
             Task.Builder bld = Sponge.getScheduler().createTaskBuilder().delay(delay,unit).execute(command);
             if(async) bld.async();
-            return add(new OmegaTask(bld.submit(plugin.asSponge())),plugin);
+            return new OmegaTask(bld.submit(Omega.getOmega()));
         }
         else{
-            return add(new OmegaTask(syncScheduler.schedule(command,delay,unit)),plugin);
+            return new OmegaTask(syncScheduler.schedule(command,delay,unit));
         }
     }
     public static OmegaTask submit(boolean async, Plugin plugin, Runnable command){
         if(MultiEnvironment.active(Environment.SPONGE)){
             Task.Builder bld = Sponge.getScheduler().createTaskBuilder().execute(command);
             if(async) bld.async();
-            return add(new OmegaTask(bld.submit(plugin.asSponge())),plugin);
+            return new OmegaTask(bld.submit(Omega.getOmega()));
         }
         else{
-            return add(new OmegaTask(syncScheduler.submit(command)),plugin);
+            return new OmegaTask(syncScheduler.submit(command));
         }
     }
     private static OmegaTask add(OmegaTask task, Plugin owner){
