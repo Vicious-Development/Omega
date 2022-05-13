@@ -13,4 +13,13 @@ public class PlayerEventListeners implements org.bukkit.event.Listener {
     public void bukkitOnPlayerLogin(org.bukkit.event.player.PlayerLoginEvent ev){
         new PlayerLoginEvent(ev);
     }
+
+    @Listener
+    public void spongeOnPlayerJoin(ClientConnectionEvent.Join ev){
+        new PlayerJoinEvent(ev);
+    }
+    @EventHandler
+    public void bukkitOnPlayerJoin(org.bukkit.event.player.PlayerJoinEvent ev){
+        new PlayerJoinEvent(ev);
+    }
 }

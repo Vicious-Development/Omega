@@ -10,6 +10,10 @@ import org.spongepowered.api.event.network.ClientConnectionEvent;
 import java.net.InetSocketAddress;
 import java.util.UUID;
 
+
+/**
+ * Todo: add more methods.
+ */
 public class PlayerLoginEvent extends PluginAPIEventWrapper<PlayerLoginEvent, ClientConnectionEvent.Login,org.bukkit.event.player.PlayerLoginEvent> implements OmegaEvent {
     public PlayerLoginEvent(Object src) {
         super(src);

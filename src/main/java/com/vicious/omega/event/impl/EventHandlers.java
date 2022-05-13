@@ -1,6 +1,7 @@
 package com.vicious.omega.event.impl;
 
 import com.vicious.omega.event.impl.consumers.IEventConsumer;
+import com.vicious.omega.event.player.PlayerJoinEvent;
 import com.vicious.omega.event.player.PlayerLoginEvent;
 import com.vicious.omega.event.plugin.PluginInitializationEvent;
 import com.vicious.viciouslib.util.reflect.deep.DeepReflection;
@@ -13,6 +14,7 @@ public class EventHandlers {
     private static Map<Class<?>,EventHandler<?>> handlers = new HashMap<>();
     public static void init(){
         addEventHandler(PlayerLoginEvent.class);
+        addEventHandler(PlayerJoinEvent.class);
         addEventHandler(PluginInitializationEvent.Other.class);
     }
     public static <T extends OmegaEvent> void dispatchEvent(T ev){
