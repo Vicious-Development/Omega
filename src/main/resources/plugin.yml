@@ -1,0 +1,12 @@
+name: OmegaBukkit
+version: @version@
+main: com.vicious.omega.OmegaBukkit
+api-version: 1.12
+prefix: OMEGA
+loadbefore: []
+depend: []
+softdepend: []
+authors: [Drathonix]
+
+description: Omega Bukkit API
+

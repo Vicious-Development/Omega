@@ -16,7 +16,6 @@ import com.vicious.viciouslib.util.reflect.deep.MethodSearchContext;
 import com.vicious.viciouslib.util.reflect.deep.TotalFailureException;
 import com.vicious.viciouslib.util.reflect.wrapper.ReflectiveConstructor;
 import com.vicious.viciouslib.util.reflect.wrapper.ReflectiveMethod;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.event.Listener;
@@ -27,7 +26,7 @@ import org.spongepowered.api.plugin.PluginContainer;
 import java.lang.reflect.Modifier;
 
 @Plugin(id = "omega", name = "Omega", version = "@version@")
-public class Omega extends JavaPlugin {
+public class Omega {
     private static Omega OMEGA;
     private static boolean pluginsInitialized = false;
 
@@ -51,13 +50,8 @@ public class Omega extends JavaPlugin {
         if(Environment.BUKKIT.active() && Environment.SPONGE.active()){
             OmegaLogger.warn("Detected multiple minecraft plugin environments running! This could be unstable! Are you sure you know what you're doing?");
         }
+        OmegaLogger.info("Omega started successfully");
         PluginCollector.collectAll();
-    }
-
-    //Bukkit init.
-    public void onEnable() {
-        getServer().getPluginManager().registerEvents(new PlayerEventListeners(), this);
-        initPlugins();
     }
 
     @Listener
@@ -69,7 +63,7 @@ public class Omega extends JavaPlugin {
     /**
      *
      */
-    private void initPlugins() {
+    void initPlugins() {
         if(pluginsInitialized) return;
         pluginsInitialized = true;
         OmegaPluginImplementation[] plugins = PluginManager.getPluginsInOrder();
