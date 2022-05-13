@@ -3,7 +3,7 @@ package com.vicious.omega.event.impl;
 import com.vicious.omega.event.impl.consumers.IEventConsumer;
 import com.vicious.omega.event.omega.PlayerJoinEvent;
 import com.vicious.omega.event.omega.PlayerLoginEvent;
-import com.vicious.omega.event.plugin.PluginInitializationEvent;
+import com.vicious.omega.event.omega.plugin.PluginInitializationEvent;
 import com.vicious.viciouslib.util.reflect.deep.DeepReflection;
 
 import java.lang.reflect.Method;

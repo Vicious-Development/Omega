@@ -5,7 +5,7 @@ import com.vicious.omega.environment.Environment;
 import com.vicious.omega.environment.annotations.EnvironmentCompatibility;
 import com.vicious.omega.event.impl.EventHandlers;
 import com.vicious.omega.event.impl.OmegaListener;
-import com.vicious.omega.event.plugin.PluginInitializationEvent;
+import com.vicious.omega.event.omega.plugin.PluginInitializationEvent;
 import com.vicious.omega.event.sponge.PlayerEventListeners;
 import com.vicious.omega.logging.OmegaLogger;
 import com.vicious.omega.plugin.OmegaPluginImplementation;
