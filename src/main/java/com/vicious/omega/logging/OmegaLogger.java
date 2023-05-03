@@ -43,8 +43,7 @@ public class OmegaLogger {
 
     /**
      * Sponge and Omega both use this.
-     * @return
-     */
+/     */
     public Logger asSLF4J(){
         return (Logger) src;
     }

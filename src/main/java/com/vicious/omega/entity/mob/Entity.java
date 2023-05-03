@@ -1,6 +1,7 @@
 package com.vicious.omega.entity.mob;
 
 import com.flowpowered.math.vector.Vector3d;
+import com.vicious.omega.entity.EntityType;
 import com.vicious.omega.entity.player.Player;
 import com.vicious.omega.environment.Environment;
 import com.vicious.omega.environment.PluginAPIWrapper;
@@ -39,6 +40,12 @@ public class Entity<OMEGAENTITY extends Entity<OMEGAENTITY,SPONGEENTITY,BUKKITEN
             Location l = asBukkit().getLocation();
             return new Vector3d(l.getX(),l.getY(), l.getZ());
         }
+        else throw new UnsupportedEnvironmentException();
+    }
+    @EnvironmentCompatibility({Environment.SPONGE,Environment.BUKKIT})
+    public EntityType getType(){
+        if(Environment.SPONGE.active()) return new EntityType(asSponge().getType());
+        else if(Environment.BUKKIT.active()) return new EntityType(asBukkit().getType());
         else throw new UnsupportedEnvironmentException();
     }
 
